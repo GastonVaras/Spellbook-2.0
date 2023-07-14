@@ -22,18 +22,16 @@ function createSpellCard(spell) {
   spellCard.appendChild(spellName);
 
   const spellCastingTime = document.createElement('p');
-  spellCastingTime.classList.add('spell-casting-time');
-  spellCastingTime.textContent = `Tiempo de Lanzamiento: ${spell.castingTime}`;
+  spellCastingTime.textContent = `Casting Time: ${spell.castingTime}`;
   spellCard.appendChild(spellCastingTime);
 
   const spellSchool = document.createElement('p');
-  spellSchool.textContent = `Escuela: ${spell.school}`;
+  spellSchool.textContent = `School: ${spell.school}`;
   spellCard.appendChild(spellSchool);
 
   const spellComponents = document.createElement('p');
   spellComponents.textContent = `Components: ${spell.components}`;
   spellCard.appendChild(spellComponents);
-
 
   const spellLevel = document.createElement('div');
   spellLevel.classList.add('spell-level');
@@ -44,34 +42,59 @@ function createSpellCard(spell) {
   spellImage.src = spell.image;
   spellCard.appendChild(spellImage);
 
+  if (spell.materialComponents) {
+    const spellMaterialComponents = document.createElement('p');
+    spellMaterialComponents.textContent = `Materials: ${spell.materialComponents}`;
+    spellCard.appendChild(spellMaterialComponents);
+    }
+    
   const spellAttributes = document.createElement('div');
   spellAttributes.classList.add('spell-attributes');
   spellCard.appendChild(spellAttributes);
 
-  const spellRange = document.createElement('p');
-  spellRange.textContent = `Range: ${spell.range}`;
-  spellAttributes.appendChild(spellRange);
-
-  const spellEffect = document.createElement('p');
-  spellEffect.textContent = `Efecto: ${spell.efecto}`;
-  spellAttributes.appendChild(spellEffect);
-
-  const spellArea = document.createElement('p');
-  spellArea.textContent = `Area: ${spell.area}`;
-  spellAttributes.appendChild(spellArea);
-
+  if (spell.range) {
+    const spellRange = document.createElement('p');
+    spellRange.textContent = `Range: ${spell.range}`;
+    spellAttributes.appendChild(spellRange);
+  }
+  if (spell.target) {
+    const spellTarget = document.createElement('p');
+    spellTarget.textContent = `Target: ${spell.target}`;
+    spellAttributes.appendChild(spellTarget);
+  }
+  if (spell.effect) {
+    const spellEffect = document.createElement('p');
+    spellEffect.textContent = `Effect: ${spell.effect}`;
+    spellAttributes.appendChild(spellEffect);
+  }
+  if (spell.area) {
+    const spellArea = document.createElement('p');
+    spellArea.textContent = `Area: ${spell.area}`;
+    spellAttributes.appendChild(spellArea);
+  }
   const spellDuration = document.createElement('p');
   spellDuration.textContent = `Duration: ${spell.duration}`;
   spellAttributes.appendChild(spellDuration);
-
-  const spellSavingThrow = document.createElement('p');
-  spellSavingThrow.textContent = `Saving Throw: ${spell.savingThrow}`;
-  spellAttributes.appendChild(spellSavingThrow);
-
-  const spellResistance = document.createElement('p');
-  spellResistance.textContent = `Spell Resistance: ${spell.spellResistance}`;
-  spellAttributes.appendChild(spellResistance);
-
+  if (spell.savingThrow) {
+    const spellSavingThrow = document.createElement('p');
+    spellSavingThrow.textContent = `Saving Throw: ${spell.savingThrow}`;
+    spellAttributes.appendChild(spellSavingThrow);
+  }
+  if (spell.spellResistance) {
+    const spellResistance = document.createElement('p');
+    spellResistance.textContent = `Spell Resistance: ${spell.spellResistance}`;
+    spellAttributes.appendChild(spellResistance);
+  }
+  if (spell.XPCost) {
+    const spellXPCost = document.createElement('p');
+    spellXPCost.textContent = `XPCost: ${spell.XPCost}`;
+    spellAttributes.appendChild(spellXPCost);
+  }
+  if (spell.focus) {
+    const spellFocus = document.createElement('p');
+    spellFocus.textContent = `XPCost: ${spell.focus}`;
+    spellAttributes.appendChild(spellFocus);
+  }
   const spellBoxDescription = document.createElement('div');
   spellBoxDescription.classList.add('spell-box-description');
   spellCard.appendChild(spellBoxDescription);
@@ -80,16 +103,21 @@ function createSpellCard(spell) {
   spellDescription.innerHTML = spell.description.replace(/~/g, '<br>');
   spellBoxDescription.appendChild(spellDescription);
 
-  
+
   return cardBody;
 }
 
 
 // Permite que se cargue la imagen correspondiente a la escuela de magia del hechizo
 function asignarEscuelaMagia(spell, cardBody) {
-  const esAbjuracion = spell.school.toLowerCase().includes("abjuracion");
-  const esAdivinacion = spell.school.toLowerCase().includes("adivinacion");
-  const esConjuracion = spell.school.toLowerCase().includes("conjuracion");
+  const esAbjuracion = spell.school.toLowerCase().includes("abjuración");
+  const esAdivinacion = spell.school.toLowerCase().includes("divination");
+  const esConjuracion = spell.school.toLowerCase().includes("conjuration");
+  const esEncantamiento = spell.school.toLowerCase().includes("encantamiento");
+  const esEvocacion = spell.school.toLowerCase().includes("evocation");
+  const esIlusionismo = spell.school.toLowerCase().includes("ilusionismo");
+  const esNigromancia = spell.school.toLowerCase().includes("nigromancia");
+  const esTransmutacion = spell.school.toLowerCase().includes("transmutación");
 
   if (esAbjuracion) {
     cardBody.classList.add('abjuracion');
@@ -97,7 +125,22 @@ function asignarEscuelaMagia(spell, cardBody) {
     cardBody.classList.add('adivinacion');
   } else if (esConjuracion) {
     cardBody.classList.add('conjuracion');
+  } else if (esEncantamiento) {
+    cardBody.classList.add('encantamiento');
+  } else if (esEvocacion) {
+    cardBody.classList.add('evocacion');
+  } else if (esIlusionismo) {
+    cardBody.classList.add('ilusionismo');
+  } else if (esNigromancia) {
+    cardBody.classList.add('nigromancia');
+  } else if (esTransmutacion) {
+    cardBody.classList.add('transmutacion');
   }
+  console.log('No pertenece a ninguna escuela de magia')
+
+
+
+
 }
 
 
