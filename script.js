@@ -46,8 +46,8 @@ function createSpellCard(spell) {
     const spellMaterialComponents = document.createElement('p');
     spellMaterialComponents.textContent = `Materials: ${spell.materialComponents}`;
     spellCard.appendChild(spellMaterialComponents);
-    }
-    
+  }
+
   const spellAttributes = document.createElement('div');
   spellAttributes.classList.add('spell-attributes');
   spellCard.appendChild(spellAttributes);
@@ -103,12 +103,9 @@ function createSpellCard(spell) {
   spellDescription.innerHTML = spell.description.replace(/~/g, '<br>');
   spellBoxDescription.appendChild(spellDescription);
 
-
   return cardBody;
 }
 
-
-// Permite que se cargue la imagen correspondiente a la escuela de magia del hechizo
 function asignarEscuelaMagia(spell, cardBody) {
   const esAbjuracion = spell.school.toLowerCase().includes("abjuración");
   const esAdivinacion = spell.school.toLowerCase().includes("divination");
@@ -136,13 +133,8 @@ function asignarEscuelaMagia(spell, cardBody) {
   } else if (esTransmutacion) {
     cardBody.classList.add('transmutacion');
   }
-  console.log('No pertenece a ninguna escuela de magia')
-
-
-
-
+  console.log('No pertenece a ninguna escuela de magia');
 }
-
 
 function renderSpells() {
   const spellsContainer = document.getElementById('spells-container');
@@ -176,6 +168,36 @@ function goToNextPage() {
 document.addEventListener('DOMContentLoaded', () => {
   totalPages = Math.ceil(spells.length / spellsPerPage);
   renderSpells();
+
+  const spellsContainer = document.getElementById('spells-container');
+
+  spellsContainer.addEventListener('mousedown', (event) => {
+    if (event.clientX < window.innerWidth / 2) {
+      goToPreviousPage();
+    } else {
+      goToNextPage();
+    }
+  });
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  spellsContainer.addEventListener('touchstart', (event) => {
+    touchStartX = event.touches[0].clientX;
+  });
+
+  spellsContainer.addEventListener('touchend', (event) => {
+    touchEndX = event.changedTouches[0].clientX;
+    handleSwipeGesture();
+  });
+
+  function handleSwipeGesture() {
+    if (touchEndX < touchStartX) {
+      goToNextPage();
+    } else if (touchEndX > touchStartX) {
+      goToPreviousPage();
+    }
+  }
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowLeft') {
