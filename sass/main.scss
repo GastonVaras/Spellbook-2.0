@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  
+  @import 'spell-card';
+
+// #spells-container idealmente se convertira en las "paginas"
+  #spells-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    
+    width: 100%;
+    height: 100vh;
+    padding: 10px;
+
+    background-color: rgb(128, 77, 19);
+    overflow: auto;
+    
+  }
+  
+  
+
+
+
+
+  
+
+//   .spell-card img {
+//     opacity: 0.75;
+//   }
+  
+
+  
+//   
+  
+  
+//   .spell-card p {
+//     margin-bottom: 5px;
+//   }
+  
+//   .spell-attributes {
+//     padding: 5px;
+//     height: 120px;
+//     width: 90%;
+//     margin: 0 auto;
+//     box-shadow: inset -1px -1px -2px grey;
+//     font-size: 14px;
+//     
+//   }
+  
+//   .spell-box-description {
+//     position: absolute;
+//     bottom: 10px;
+//     width: 95%;
+//     height: 30%;
+//     padding: 5px;
+//     background-color: beige;
+//     border: 2px solid black;
+//     border-radius: 10px;
+//     box-shadow: 3px 3px 3px grey;
+//     overflow: auto;
+//   }
