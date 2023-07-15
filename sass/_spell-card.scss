@@ -1,0 +1,139 @@
+// .spell-card corresponde a cada carta de hechizo particular
+// lograr que se vean como pergaminos?
+.spell-cardbody {
+    // position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    background-color: rgb(181, 152, 94);
+    border: 2px solid black;
+    width: 100%;
+    padding: 10px;
+    box-shadow: 4px 4px 4px rgb(51, 32, 7);
+    overflow: auto;
+    text-shadow: #FC0 1px 0 10px;
+
+    .spell-content {
+        display: grid;
+        grid-template-rows: 110px 200px 150px auto 65px;
+        border: 2px solid black;
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        overflow: auto;
+
+        .spell-title {
+            display: grid;
+            grid-template-columns: 75% 25%;
+            position: relative;
+            max-width: 300px;
+
+            .spell-title-text {
+                p {
+                    color: black;
+                    text-shadow: #FC0 1px 0 10px;
+                }
+
+                h3 {
+                    font-size: 20px;
+                    text-shadow: none;
+                }
+            }
+
+            .spell-level {
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                right: -5px;
+                top: -5px;
+                font-size: 36px;
+                vertical-align: middle;
+                font-weight: bolder;
+                text-shadow: none;
+                text-align: center;
+                background-image: url('../images/Nivel.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+                z-index: 1;
+
+                img {
+                    max-width: 60px;
+                    z-index: -1;
+                }
+            }
+        }
+
+        .spell-illustration {
+            position: relative;
+            align-self: center;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border: 2px black solid;
+            border-radius: 15px;
+            margin: auto;
+        }
+
+        .spell-attributes {
+            max-height: 150px;
+            padding: 5px;
+            width: 100%;
+            margin: 0 auto;
+            box-shadow: inset -1px -1px -2px grey;
+            font-size: 14px;
+            overflow: auto;
+            align-self: center;
+
+            p {
+                font-size: 16px;
+            }
+        }
+
+        .spell-box-description {
+            overflow: auto;
+            padding: 5px;
+            background-color: beige;
+            border: 2px solid black;
+            border-radius: 10px;
+            box-shadow: 3px 3px 3px grey;
+            text-shadow: none;
+        }
+    }
+
+    .abjuration {
+        background-color: rgba(0, 60, 255, 0.35);
+    }
+
+    .divination {
+        background-color: rgba(211, 211, 211, 0.75);
+    }
+
+    .conjuration {
+        background-color: rgba(0, 128, 0, 0.35);
+    }
+
+    .enchantment {
+        background-color: rgba(255, 255, 0, 0.5);
+    }
+
+    .evocation {
+        background-color: rgba(255, 0, 0, 0.35);
+    }
+
+    .illusion {
+        background-color: rgba(128, 0, 128, 0.3);
+    }
+
+    .necromancy {
+        background-color: rgba(47, 79, 79, 0.5);
+    }
+
+    .transmutation {
+        background-color: rgba(255, 166, 0, 0.5);
+    }
+
+
+
+}
