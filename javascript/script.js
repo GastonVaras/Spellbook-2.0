@@ -3,7 +3,6 @@ import {
   spells
 } from "./spells.js";
 
-
 let spellsPerPage = calculateSpellsPerPage();
 let currentPage = 1;
 let totalPages = Math.ceil(spells.length / spellsPerPage);
@@ -11,11 +10,22 @@ let totalPages = Math.ceil(spells.length / spellsPerPage);
 function calculateSpellsPerPage() {
   const screenWidth = window.innerWidth;
   // Define las resoluciones y la cantidad correspondiente de hechizos por página
-  const resolutions = [
-    { width: 425, spellsPerPage: 1 },
-    { width: 768, spellsPerPage: 2 },
-    { width: 1024, spellsPerPage: 3 },
-    { width: 1440, spellsPerPage: 4 },
+  const resolutions = [{
+      width: 425,
+      spellsPerPage: 1
+    },
+    {
+      width: 768,
+      spellsPerPage: 2
+    },
+    {
+      width: 1024,
+      spellsPerPage: 3
+    },
+    {
+      width: 1440,
+      spellsPerPage: 4
+    },
     // Agrega más resoluciones según tus necesidades
   ];
   // Recorre las resoluciones de manera descendente y devuelve la cantidad de hechizos por página correspondiente a la primera resolución que coincide o la cantidad máxima si ninguna coincide
@@ -34,6 +44,8 @@ window.addEventListener('resize', () => {
   renderSpells();
 });
 
+// renderSpells se encarga de actualizar el contenido del contenedor de hechizos en función de la página actual. 
+//Calcula los índices de inicio y fin para determinar qué hechizos mostrar, crea las tarjetas de hechizo correspondientes y las agrega al contenedor.
 function renderSpells() {
   const spellsContainer = document.getElementById('spells-container');
   spellsContainer.innerHTML = '';
@@ -49,93 +61,82 @@ function renderSpells() {
   });
 }
 
+
 function createSpellCard(spell) {
 
-
-  // // "spellsContainer = #spells-container"
-  // const spellsContainer = document.getElementById('spells-container');
-  // // 1 - Crear "spellCardbody = .spell-card" y meterlo dentro de "spellsContainer"
-  // const spellCardbody = document.createElement('div');
-  // spellCardbody.classList.add('spell-cardbody');
-  // spellsContainer.appendChild(spellCardbody);
-
-
+  // Paso 1: Crear el cuerpo de la carta (spellCardbody) y el contenido (spellContent)
   const spellCardbody = document.createElement('div');
   spellCardbody.classList.add('spell-cardbody');
+  spellCardbody.addEventListener('click', toggleSpellClass);
+  spellCardbody.dataset.hasClass = 'false';
 
-
-
-  // 2 - Crear "spellContent = spell-content" y meterla dentro de spellCardbody
   const spellContent = document.createElement('div');
   spellContent.classList.add('spell-content');
   spellCardbody.appendChild(spellContent);
 
-  // 3 - Crear "spellTitle = .spell-title" y meterlo dentro de spellContent
+  // Paso 2 - Crear los 5 divs contenedores (title, illustration, attributes, description, extra)
   const spellTitle = document.createElement('div');
   spellTitle.classList.add('spell-title');
   spellContent.appendChild(spellTitle);
 
+  const spellIllustration = document.createElement('div');
+  spellIllustration.classList.add('spell-illustration');
+  spellContent.appendChild(spellIllustration);
 
+  const spellAttributes = document.createElement('div');
+  spellAttributes.classList.add('spell-attributes');
+  spellContent.appendChild(spellAttributes);
 
+  const spellBoxDescription = document.createElement('div');
+  spellBoxDescription.classList.add('spell-box-description');
+  spellContent.appendChild(spellBoxDescription);
 
+  const spellExtra = document.createElement('div');
+  spellExtra.classList.add('spell-extra');
+  spellContent.appendChild(spellExtra);
+
+  // Paso 3 - Completar spellTitle (div .spell-title-text; p .spell-level)
   const spellTitleText = document.createElement('div');
   spellTitleText.classList.add('spell-title-text');
   spellTitle.appendChild(spellTitleText);
 
-
-
-
-
-  // 4- HIJO DE .spell-title
-  const spellName = document.createElement('h3');
-  spellName.textContent = spell.name;
-  spellTitleText.appendChild(spellName);
-  // 4- HIJO DE .spell-title
-  const spellCastingTime = document.createElement('p');
-  spellCastingTime.textContent = `Casting Time: ${spell.castingTime}`;
-  spellTitleText.appendChild(spellCastingTime);
-  // 4- HIJO DE .spell-title
-  const spellSchool = document.createElement('p');
-  spellSchool.textContent = `School: ${spell.school}`;
-  spellTitleText.appendChild(spellSchool);
-  // 4- HIJO DE .spell-title
-  const spellComponents = document.createElement('p');
-  spellComponents.textContent = `Components: ${spell.components}`;
-  spellTitleText.appendChild(spellComponents);
-
-
-
-
-
-
-
-  // 4- HIJO DE .spell-title 
   const spellLevel = document.createElement('p');
   spellLevel.classList.add('spell-level');
   spellLevel.textContent = `${spell.level}`;
   spellTitle.appendChild(spellLevel);
 
+  // Paso 4 - Completar spellTitleText (h3 name; p casting time; p school; p components)
+  const spellName = document.createElement('h3');
+  spellName.textContent = spell.name;
+  spellTitleText.appendChild(spellName);
 
+  const spellCastingTime = document.createElement('p');
+  spellCastingTime.textContent = `Casting Time: ${spell.castingTime}`;
+  spellTitleText.appendChild(spellCastingTime);
 
-  // 5 - Crear "spellIllustration = .spell/illustration" y meterlo dentro de spellContent
-  const spellIllustration = document.createElement('div');
-  spellIllustration.classList.add('spell-illustration');
-  spellContent.appendChild(spellIllustration);
-  // 6 - crear "spellImage y meterla dentro de spellIllustration"
+  // La escuela me gustaria que se refleje en el diseño
+  const spellSchool = document.createElement('p');
+  spellSchool.textContent = `School: ${spell.school}`;
+  spellTitleText.appendChild(spellSchool);
+
+  const spellComponents = document.createElement('p');
+  spellComponents.textContent = `Components: ${spell.components}`;
+  spellTitleText.appendChild(spellComponents);
+
+  // Paso 5 - Completar spellIllustration (img; p .spell-image-description)
   const spellImage = document.createElement('img');
   spellImage.src = spell.image;
   spellIllustration.appendChild(spellImage);
-  
+
   const spellImageDescription = document.createElement('p')
   spellImageDescription.classList.add('spell-image-description');
   spellImageDescription.textContent = `${spell.imageDescription}`;
+  // Esto permite poner "punto aparte" en spells.js por medio del tilde: ~
+  spellImageDescription.innerHTML = spell.imageDescription.replace(/~/g, '<br>');
   spellIllustration.appendChild(spellImageDescription);
 
-  // 7 - Crear "spellAttributes = .spell-attributes" y meterlo dentro de spellContent
-  const spellAttributes = document.createElement('div');
-  spellAttributes.classList.add('spell-attributes');
-  spellContent.appendChild(spellAttributes);
-  // 8- HIJO DE .spell-attributes solo visible si tiene info el hechizo
+  // Paso 6 - Completar spellAttributes (range, target, effect, area, duration, savingThrow, spellResistance)
+  // Los atributos en if statement solo son visibles si tiene info el hechizo
   if (spell.range) {
     const spellRange = document.createElement('p');
     spellRange.textContent = `Range: ${spell.range}`;
@@ -157,11 +158,10 @@ function createSpellCard(spell) {
     spellAttributes.appendChild(spellArea);
   }
 
-  // 8- HIJO DE .spell-attributes 
   const spellDuration = document.createElement('p');
   spellDuration.textContent = `Duration: ${spell.duration}`;
   spellAttributes.appendChild(spellDuration);
-  // 8- HIJO DE .spell-attributes solo visible si tiene info el hechizo
+
   if (spell.savingThrow) {
     const spellSavingThrow = document.createElement('p');
     spellSavingThrow.textContent = `Saving Throw: ${spell.savingThrow}`;
@@ -171,6 +171,18 @@ function createSpellCard(spell) {
     const spellResistance = document.createElement('p');
     spellResistance.textContent = `Spell Resistance: ${spell.spellResistance}`;
     spellAttributes.appendChild(spellResistance);
+  }
+
+  // Paso 7 - Completar spellDescription 
+  const spellDescription = document.createElement('p');
+  spellDescription.innerHTML = spell.description.replace(/~/g, '<br>');
+  spellBoxDescription.appendChild(spellDescription);
+
+  // Paso 8 - Completar spellExtra
+  if (spell.materialComponents) {
+    const spellMaterialComponents = document.createElement('p');
+    spellMaterialComponents.textContent = `Materials: ${spell.materialComponents}`;
+    spellExtra.appendChild(spellMaterialComponents);
   }
   if (spell.XPCost) {
     const spellXPCost = document.createElement('p');
@@ -183,31 +195,26 @@ function createSpellCard(spell) {
     spellAttributes.appendChild(spellFocus);
   }
 
-  // 9 - Crear "spellBoxDescription = .spell-box-description" y meterla dentro de spellContent
-  const spellBoxDescription = document.createElement('div');
-  spellBoxDescription.classList.add('spell-box-description');
-  spellContent.appendChild(spellBoxDescription);
-  // 10 - Crear parrafo de descripción
-  const spellDescription = document.createElement('p');
-  spellDescription.innerHTML = spell.description.replace(/~/g, '<br>');
-  spellBoxDescription.appendChild(spellDescription);
-
-  // 11 - Crear "spellExtra = .spell-extra"
-  const spellExtra = document.createElement('div');
-  spellExtra.classList.add('spell-extra');
-  spellContent.appendChild(spellExtra);
-
-  // 12 - HIJO DE .spellExtra solo visible si tiene info el hechizo
-  if (spell.materialComponents) {
-    const spellMaterialComponents = document.createElement('p');
-    spellMaterialComponents.textContent = `Materials: ${spell.materialComponents}`;
-    spellExtra.appendChild(spellMaterialComponents);
-  }
-
-  // 13 - imprimir toda la carta
   return spellCardbody;
 }
 
+// Toggle para "preparar" hechizos
+let isSpellCardActive = false;
+
+function toggleSpellClass(event) {
+  const spellCardbody = event.currentTarget;
+
+  if (isSpellCardActive) {
+    spellCardbody.classList.remove('unprepared');
+  } else {
+    spellCardbody.classList.add('unprepared');
+  }
+
+  // Actualizamos el estado del toggle
+  isSpellCardActive = !isSpellCardActive;
+}
+
+// Determina escuela de magia y asigna color correspondiente al fondo
 function asignarEscuelaMagia(spell, cardBody) {
   const esAbjuration = spell.school.toLowerCase().includes("abjuration");
   const esDivination = spell.school.toLowerCase().includes("divination");
@@ -238,10 +245,9 @@ function asignarEscuelaMagia(spell, cardBody) {
   } else if (esTransmutation) {
     spellContent.classList.add('transmutation');
   }
-  console.log('No pertenece a ninguna escuela de magia');
 }
 
-
+// Funciones que permiten el desplazamiento entre páginas
 function goToPreviousPage() {
   if (currentPage > 1) {
     currentPage--;
@@ -255,7 +261,6 @@ function goToNextPage() {
     renderSpells();
   }
 }
-
 document.addEventListener('DOMContentLoaded', () => {
   totalPages = Math.ceil(spells.length / spellsPerPage);
   renderSpells();

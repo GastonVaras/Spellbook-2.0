@@ -37,7 +37,7 @@
   text-shadow: #FC0 1px 0 10px;
 }
 .spell-cardbody .spell-content .spell-title .spell-title-text h3 {
-  font-size: 20px;
+  font-size: 30px;
   text-shadow: none;
 }
 .spell-cardbody .spell-content .spell-title .spell-level {
@@ -69,6 +69,13 @@
   overflow: hidden;
   border: 2px black solid;
   border-radius: 15px;
+}
+.spell-cardbody .spell-content .spell-illustration .spell-image-description {
+  font-size: 20px;
+  text-shadow: 1px 1px 3px black;
+  text-align: center;
+  padding: 5px 50px;
+  overflow: auto;
 }
 .spell-cardbody .spell-content .spell-illustration p {
   position: absolute;
@@ -118,6 +125,10 @@
 }
 .spell-cardbody .transmutation {
   background-color: rgba(255, 166, 0, 0.5);
+}
+
+.unprepared {
+  opacity: 0.2;
 }
 
 #spells-container {

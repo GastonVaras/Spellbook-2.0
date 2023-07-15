@@ -37,7 +37,7 @@
                 }
 
                 h3 {
-                    font-size: 20px;
+                    font-size: 30px;
                     text-shadow: none;
                 }
             }
@@ -74,7 +74,13 @@
             overflow: hidden;
             border: 2px black solid;
             border-radius: 15px;
-
+            .spell-image-description {
+                font-size: 20px;
+                text-shadow: 1px 1px 3px black;
+                text-align: center;
+                padding: 5px 50px;
+                overflow: auto;
+            }
             p {
                 position: absolute;
             }
@@ -137,4 +143,8 @@
     .transmutation {
         background-color: rgba(255, 166, 0, 0.5);
     }
+
+}
+.unprepared {
+    opacity: 0.2;
 }

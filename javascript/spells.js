@@ -1,17 +1,40 @@
 const spells = [
+    // {
+    //     name: "spellTitle",
+    //     castingTime: "spellTitle",
+    //     school: "spellTitle",
+    //     components: "spellTitle",
+    //     level: "spellTitle",
 
+    //     image: "spellIllustration",
+    //     imageDescription:"spellIllustration",
+    
+    //     range: "spellAttributes",
+    //     target: "spellAttributes",
+    //     effect: "spellAttributes",
+    //     area: "spellAttributes",
+    //     duration: "spellAttributes",
+    //     savingThrow: "spellAttributes",
+    //     spellResistance: "spellAttributes",
+
+    //     description: "spellDescription",
+
+    //     materialComponents: "spellExtra",
+    //     XPCost: "spellExtra",
+    //     focus: "spellExtra",
+    // },
     {
         name: "Create Water",
         school: "Conjuration",
         level: "0",
         image: "./images/water-template.png",
-        imageDescription:"UN GALON DE AGUA",
+        imageDescription:"Create up to 2 gallons of water/level.~~   1 gallon weighs about 8 pounds.~~    One cubic foot contains roughly 8 gallons and weighs about 60 pounds.",
         components: "V, S",
         materialComponents: "",
         castingTime: "1 action",
         range: "Close (25 ft. + 5 ft./2 levels)",
         target: "",
-        effect: "Up to 2 gallons of water/level",
+        effect: "",
         area: "",
         duration: "Instantaneous",
         savingThrow: "None",
