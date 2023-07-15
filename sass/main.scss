@@ -10,7 +10,6 @@
 // #spells-container idealmente se convertira en las "paginas"
   #spells-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 8px;
     
     width: 100%;
@@ -22,6 +21,29 @@
     
   }
   
+  @media screen and (max-width: 425px) {
+    #spells-container {
+      grid-template-columns: 1fr; /* Una columna para pantallas de hasta 768px */
+    }
+  }
+  
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    #spells-container {
+      grid-template-columns: 1fr 1fr; /* Una columna para pantallas de hasta 768px */
+    }
+  }
+
+  @media screen and (min-width: 1024px) and (max-width: 1439px) {
+    #spells-container {
+      grid-template-columns: 1fr 1fr 1fr; /* Una columna para pantallas de hasta 768px */
+    }
+  }
+
+  @media screen and (min-width: 1440px) {
+    #spells-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+  }
   
 
 

@@ -28,7 +28,7 @@
             display: grid;
             grid-template-columns: 75% 25%;
             position: relative;
-            max-width: 300px;
+
 
             .spell-title-text {
                 p {
@@ -44,11 +44,11 @@
 
             .spell-level {
                 position: absolute;
-                width: 50px;
-                height: 50px;
-                right: -5px;
-                top: -5px;
+                width: 60px;
+                height: 60px;
+                right: 0px;
                 font-size: 36px;
+                line-height: 50px;
                 vertical-align: middle;
                 font-weight: bolder;
                 text-shadow: none;
@@ -66,14 +66,18 @@
         }
 
         .spell-illustration {
-            position: relative;
-            align-self: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
             height: 100%;
             overflow: hidden;
             border: 2px black solid;
             border-radius: 15px;
-            margin: auto;
+
+            p {
+                position: absolute;
+            }
         }
 
         .spell-attributes {
@@ -133,7 +137,4 @@
     .transmutation {
         background-color: rgba(255, 166, 0, 0.5);
     }
-
-
-
 }

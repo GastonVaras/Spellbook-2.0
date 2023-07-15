@@ -4,9 +4,35 @@ import {
 } from "./spells.js";
 
 
-const spellsPerPage = 4;
+let spellsPerPage = calculateSpellsPerPage();
 let currentPage = 1;
 let totalPages = Math.ceil(spells.length / spellsPerPage);
+
+function calculateSpellsPerPage() {
+  const screenWidth = window.innerWidth;
+  // Define las resoluciones y la cantidad correspondiente de hechizos por página
+  const resolutions = [
+    { width: 425, spellsPerPage: 1 },
+    { width: 768, spellsPerPage: 2 },
+    { width: 1024, spellsPerPage: 3 },
+    { width: 1440, spellsPerPage: 4 },
+    // Agrega más resoluciones según tus necesidades
+  ];
+  // Recorre las resoluciones de manera descendente y devuelve la cantidad de hechizos por página correspondiente a la primera resolución que coincide o la cantidad máxima si ninguna coincide
+  for (let i = resolutions.length - 1; i >= 0; i--) {
+    if (screenWidth >= resolutions[i].width) {
+      return resolutions[i].spellsPerPage;
+    }
+  }
+  return resolutions[0].spellsPerPage; // Valor predeterminado
+}
+
+// Actualiza la cantidad de hechizos por página al cambiar el tamaño de la ventana
+window.addEventListener('resize', () => {
+  spellsPerPage = calculateSpellsPerPage();
+  totalPages = Math.ceil(spells.length / spellsPerPage);
+  renderSpells();
+});
 
 function renderSpells() {
   const spellsContainer = document.getElementById('spells-container');
@@ -22,8 +48,6 @@ function renderSpells() {
     spellsContainer.appendChild(cardBody);
   });
 }
-
-
 
 function createSpellCard(spell) {
 
@@ -101,6 +125,11 @@ function createSpellCard(spell) {
   const spellImage = document.createElement('img');
   spellImage.src = spell.image;
   spellIllustration.appendChild(spellImage);
+  
+  const spellImageDescription = document.createElement('p')
+  spellImageDescription.classList.add('spell-image-description');
+  spellImageDescription.textContent = `${spell.imageDescription}`;
+  spellIllustration.appendChild(spellImageDescription);
 
   // 7 - Crear "spellAttributes = .spell-attributes" y meterlo dentro de spellContent
   const spellAttributes = document.createElement('div');
@@ -235,9 +264,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let touchStartX = 0;
   let touchEndX = 0;
-  let minSwipeDistance = 50; // Distancia mínima requerida para considerar un swipe
+  let minSwipeDistance = 25; // Distancia mínima requerida para considerar un swipe
 
-  spellsContainer.addEventListener('passive', (event) => {
+  spellsContainer.addEventListener('touchstart', (event) => {
     touchStartX = event.touches[0].clientX;
   });
 
